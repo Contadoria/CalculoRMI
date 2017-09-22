@@ -2,7 +2,7 @@
 
 Este repositório hospeda o site com a documentação da planilha *CalculoRMI* desenvolvida em *Google Sheets* pela **Contadoria**, organização criada no *Github* para o desenvolvimento de ferramentas de cálculo de benefícios previdenciários.
 
-### Características
+### Características da planilha
 
 * Contempla os benefícios mais comuns
 * Delimitação automática do PBC
