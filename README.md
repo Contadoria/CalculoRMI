@@ -1,14 +1,11 @@
-## Planilha de cálculo de tempo de contribuição.
+## Planilha de cálculo da renda mensal inicial.
 
 ### Características
 
-* Ordem cronológica automática
-* Eliminação automática de concomitância
-* Conversão automática, direta e inversa
-* Cômputo de carência
-* Acréscimos do art. 3º da Lei 11.718
-* Indicação de erros e inconsistências
-* Inserção de tempo em CTC 
+* Contempla os benefícios mais comuns
+* Delimitação automática do PBC
+* Seleção automática dos salários de contribuição
+* Contempla atividades concomitantes
 * Inserção de notas e observações
 * Preenchimento automático, com uso de complemento
 * Adaptação do cálculo a qualquer entendimento, com o uso de modificadores
