@@ -6,12 +6,12 @@ order: 0
 
 ##### **AtividadeSecundaria** `D16`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 0.###############
 ~~~
 
-+ **Regra de validação**:
+
 ~~~
 VALUE_IN_LIST Não,Sim
 ~~~
@@ -22,7 +22,7 @@ VALUE_IN_LIST Não,Sim
 
 ##### **Autor** `D6`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 0.###############
 ~~~
@@ -34,12 +34,12 @@ VALUE_IN_LIST Não,Sim
 
 ##### **BeneficioDeficiente** `K9`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 #,##0
 ~~~
 
-+ **Regra de validação**:
+
 ~~~
 VALUE_IN_LIST Sim,Não
 ~~~
@@ -50,7 +50,7 @@ VALUE_IN_LIST Sim,Não
 
 ##### **Citacao** `D9`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 dd/MM/yyyy
 ~~~
@@ -62,7 +62,7 @@ dd/MM/yyyy
 
 ##### **Coeficiente** `K8`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 0.00%
 ~~~
@@ -76,7 +76,7 @@ dd/MM/yyyy
 ##### **DIB** `K7`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
 
-+ **Regra de validação**:
+
 ~~~
 DATE_IS_VALID_DATE 
 ~~~
@@ -87,7 +87,7 @@ DATE_IS_VALID_DATE
 
 ##### **DataNascimento** `D13`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 dd/mm/yyyy
 ~~~
@@ -99,7 +99,7 @@ dd/mm/yyyy
 
 ##### **DenominadorAtividadeSecundaria** `D18`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 0.###############
 ~~~
@@ -111,12 +111,12 @@ dd/mm/yyyy
 
 ##### **Especie** `K6`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 0.###############
 ~~~
 
-+ **Regra de validação**:
+
 ~~~
 VALUE_IN_RANGE ListaBeneficios!A:A
 ~~~
@@ -127,7 +127,7 @@ VALUE_IN_RANGE ListaBeneficios!A:A
 
 ##### **NB** `K5`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 0.###############
 ~~~
@@ -139,7 +139,7 @@ VALUE_IN_RANGE ListaBeneficios!A:A
 
 ##### **NumeradorAtividadeSecundaria** `D17`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 0.###############
 ~~~
@@ -151,7 +151,7 @@ VALUE_IN_RANGE ListaBeneficios!A:A
 
 ##### **Processo** `D5`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 0.###############
 ~~~
@@ -163,7 +163,7 @@ VALUE_IN_RANGE ListaBeneficios!A:A
 
 ##### **Protocolo** `D8`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 dd/MM/yyyy
 ~~~
@@ -175,7 +175,7 @@ dd/MM/yyyy
 
 ##### **Reu** `D7`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 #,##0
 ~~~
@@ -187,12 +187,12 @@ dd/MM/yyyy
 
 ##### **Sexo** `D12`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 0.###############
 ~~~
 
-+ **Regra de validação**:
+
 ~~~
 VALUE_IN_LIST Homem,Mulher
 ~~~
@@ -204,12 +204,12 @@ VALUE_IN_LIST Homem,Mulher
 
 ##### **TCAnos** `K12`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 0.###############
 ~~~
 
-+ **Regra de validação**:
+
 ~~~
 NUMBER_GREATER_THAN_OR_EQUAL_TO 0
 ~~~
@@ -220,12 +220,12 @@ NUMBER_GREATER_THAN_OR_EQUAL_TO 0
 
 ##### **TCDias** `K14`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 0.###############
 ~~~
 
-+ **Regra de validação**:
+
 ~~~
 NUMBER_GREATER_THAN_OR_EQUAL_TO 0
 ~~~
@@ -236,12 +236,12 @@ NUMBER_GREATER_THAN_OR_EQUAL_TO 0
 
 ##### **TCMeses** `K13`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 0.###############
 ~~~
 
-+ **Regra de validação**:
+
 ~~~
 NUMBER_GREATER_THAN_OR_EQUAL_TO 0
 ~~~

@@ -5,10 +5,9 @@ order: 2
 ---
 
 ##### **CompetenciaModificadores** `C:C`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=ARRAYFORMULA(IF(ROW(CompetenciaIndices)=1;"Competência";CompetenciaIndices)){% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 mm/yyyy
 0.###############
@@ -21,7 +20,7 @@ mm/yyyy
 
 ##### **ModificadoresIndiceMensalAtualizacao** `F:F`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 #,##0.00000000;(#,##0.00000000)[Red];-
 ~~~
@@ -34,7 +33,7 @@ Modificação dos índices de atualização a serem aplicados aos s.c., inserç�
 
 ##### **ModificadoresObservacoes** `I:I`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 0.00%
 0.###############
@@ -48,7 +47,7 @@ Inserção de observações vinculadas aos modificadores.
 
 ##### **ModificadoresPiso** `D:D`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 #,##0.00;(#,##0.00)[Red];-
 ~~~
@@ -61,7 +60,7 @@ Modifica o piso salarial a ser considerado na competência, inserção manual.
 
 ##### **ModificadoresSalarios** `G:G`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 #,##0.00;(#,##0.00)[Red];-
 ~~~
@@ -75,7 +74,7 @@ Modificação do s.c. relativo à competência, inserção manual.
 
 ##### **ModificadoresTeto** `E:E`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 #,##0.00;(#,##0.00)[Red];-
 ~~~
@@ -88,7 +87,7 @@ Modificação do teto previdenciário relativo à competência, inserção manua
 
 ##### **ModificadoresUsarPiso** `H:H`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 0.###############
 ~~~

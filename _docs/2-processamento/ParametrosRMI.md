@@ -5,10 +5,9 @@ order: 1
 ---
 
 ##### **AplicacaoProgressivaFatorPrevidenciario** `B18`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=IF(AND(DDA>=DATE(1999;11;29);DDA<=DATE(1999;11;30));1;MIN(DATEDIF(DATE(1999;12;1);DDA;"M")+1;60)){% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 0.00
 ~~~
@@ -20,10 +19,9 @@ order: 1
 * * *
 
 ##### **BaseIndiceTeto** `B29`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=IF(OR(MID(CriterioPC;1;1)="1";MID(CriterioPC;1;1)="2");IF(ApurarIndiceTetoComFatorPrevidenciario="SIM";SalarioBeneficio;MAX(SalarioBeneficio;MediaSemFatorPrevidenciario));SalarioBeneficio){% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 #,##0.00;(#,##0.00)[Red];-
 ~~~
@@ -35,10 +33,9 @@ Considerada a opção "SIM" na planilha "Modificadores1", célula F20, será uti
 * * *
 
 ##### **CompetenciaFinal** `B4`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=EOMONTH(DDA;-2)+1{% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 mm"/"yyyy
 ~~~
@@ -49,10 +46,9 @@ mm"/"yyyy
 * * *
 
 ##### **CompetenciaInicial** `B3`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=IF(OR(MID(CriterioPC;1;1)="4";MID(CriterioPC;1;1)="5");EDATE((EOMONTH(DDA;-1)+1);-48);IF(MID(CriterioPC;1;1)="3";EDATE((EOMONTH(DDA;-1)+1);-48);DATE(1994;7;1))){% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 mm"/"yyyy
 ~~~
@@ -66,10 +62,9 @@ mm"/"yyyy
 * * *
 
 ##### **DivisorConsiderado** `B14`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=MAX(PCConsiderado;DivisorMinimo){% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 0
 ~~~
@@ -80,10 +75,9 @@ mm"/"yyyy
 * * *
 
 ##### **DivisorMinimo** `B10`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=IF(MID(CriterioPC;1;1)="2";ROUNDDOWN(TotalCompetencias*0,6);IF(MID(CriterioPC;1;1)="3";12;IF(MID(CriterioPC;1;1)="5";24;ROUNDDOWN(TotalSalariosDDA*0,8)))){% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 0.###############
 ~~~
@@ -94,10 +88,9 @@ mm"/"yyyy
 * * *
 
 ##### **FatorPrevidenciario** `B17`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=(TCTotalDias/360)*0,31/ExpectativaSobrevida*(1+(IdadeTotal+((TCTotalDias/360)*0,31))/100){% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 0.0000
 ~~~
@@ -108,10 +101,9 @@ mm"/"yyyy
 * * *
 
 ##### **IdadeTotal** `B16`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=DAYS360(DataNascimento;DIB)/360{% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 0.00
 ~~~
@@ -122,10 +114,9 @@ mm"/"yyyy
 * * *
 
 ##### **IndiceTeto** `B30`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=MAX(BaseIndiceTeto/TetoDDA;1){% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 #,##0.00;(#,##0.00)[Red];-
 ~~~
@@ -137,10 +128,9 @@ Seleciona o valor máximo entre "1" e a divisão de "BaseIndiceTeto" por "TetoDD
 * * *
 
 ##### **LinhaInicialTabelaIndices** `B5`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=MATCH(CompetenciaInicial;IndicesConsolidados!A:A;0){% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 0
 ~~~
@@ -151,10 +141,9 @@ Seleciona o valor máximo entre "1" e a divisão de "BaseIndiceTeto" por "TetoDD
 * * *
 
 ##### **LinhaInicialTabelaModificadores** `B6`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=MATCH(CompetenciaInicial;CompetenciaModificadores;0){% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 0.###############
 ~~~
@@ -166,10 +155,9 @@ Seleciona o valor máximo entre "1" e a divisão de "BaseIndiceTeto" por "TetoDD
 * * *
 
 ##### **LinhaInicialTabelaSalarios** `B7`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=MATCH(CompetenciaInicial;CalculoSalarios!A:A;0){% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 0
 ~~~
@@ -180,10 +168,9 @@ Seleciona o valor máximo entre "1" e a divisão de "BaseIndiceTeto" por "TetoDD
 * * *
 
 ##### **MediaComFatorPrevidenciario** `B21`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=((MediaSemFatorPrevidenciario*FatorPrevidenciario*AplicacaoProgressivaFatorPrevidenciario)/60)+((MediaSemFatorPrevidenciario*(60-AplicacaoProgressivaFatorPrevidenciario))/60){% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 #,##0.00;(#,##0.00)[Red];-
 ~~~
@@ -194,10 +181,9 @@ Seleciona o valor máximo entre "1" e a divisão de "BaseIndiceTeto" por "TetoDD
 * * *
 
 ##### **MediaSemFatorPrevidenciario** `B20`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=IF(AtividadeSecundaria="Sim";(SomaSalarios/DivisorConsiderado)*NumeradorAtividadeSecundaria/DenominadorAtividadeSecundaria;(SomaSalarios/DivisorConsiderado)+ValorAtividadeSecundaria){% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 #,##0.00;(#,##0.00)[Red];-
 ~~~
@@ -209,10 +195,9 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 * * *
 
 ##### **PBCMaximo** `B11`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=IF(MID(CriterioPC;1;1)="3";15;IF(OR(MID(CriterioPC;1;1)="4";MID(CriterioPC;1;1)="5");48;TotalCompetencias)){% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 0.###############
 ~~~
@@ -223,7 +208,6 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 * * *
 
 ##### **PCConsiderado** `B13`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=MIN(TotalSalariosDDA;MAX(PCMaximo;DivisorMinimo)){% endhighlight %}
 
 
@@ -233,10 +217,9 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 * * *
 
 ##### **PCMaximo** `B12`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=IF(OR(MID(CriterioPC;1;1)="1";MID(CriterioPC;1;1)="2");ROUNDDOWN(TotalSalariosDDA*0,8);IF(MID(CriterioPC;1;1)="3";12;IF(OR(MID(CriterioPC;1;1)="4";MID(CriterioPC;1;1)="5");36;TotalSalariosDDA))){% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 0.###############
 ~~~
@@ -247,10 +230,9 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 * * *
 
 ##### **PisoDDA** `B22`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=INDEX(SalarioMinimo;MATCH(EOMONTH(DDA;-1)+1;IndicesConsolidados!A:A;0)){% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 #,##0.00;(#,##0.00)[Red];-
 ~~~
@@ -261,10 +243,9 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 * * *
 
 ##### **RMI** `B28`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=MIN(TetoDDA;MAX(IF(Limitacao12Ultimos="SIM";MIN(SalarioBeneficio*Coeficiente;MediaUltimos12Salarios);SalarioBeneficio*Coeficiente);IF(MID(Especie;1;2)="36";PisoDDA*Coeficiente;PisoDDA))){% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 #,##0.00;(#,##0.00)[Red];-
 ~~~
@@ -275,10 +256,9 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 * * *
 
 ##### **SalarioBeneficio** `B27`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=MIN(TetoDDA;MAX(PisoDDA;IF(OR(MID(CriterioPC;1;1)="4";MID(CriterioPC;1;1)="5");MediaUltimos36SalariosDe48;IF(MID(CriterioPC;1;1)="3";MediaUltimos12SalariosDe15;IF(AplicarFatorPrevidenciario="FACULTATIVO";MAX(MediaComFatorPrevidenciario;MediaSemFatorPrevidenciario);IF(AplicarFatorPrevidenciario="NÃO";MediaSemFatorPrevidenciario;MediaComFatorPrevidenciario)))))){% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 #,##0.00;(#,##0.00)[Red];-
 ~~~
@@ -292,10 +272,9 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 * * *
 
 ##### **SomaSalarios** `B19`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=SUM(ARRAYFORMULA(OFFSET(SalarioAtualizado;1;0;TotalCompetencias)*OFFSET(SalarioUtilizado;1;0;TotalCompetencias))){% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 #,##0.00;(#,##0.00)[Red];-
 ~~~
@@ -306,10 +285,9 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 * * *
 
 ##### **TCTotalDias** `B15`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=(TCAnos*360)+(TCMeses*30)+TCDias + (IF(Sexo="Mulher";360*5;0)){% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 0.00
 ~~~
@@ -320,10 +298,9 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 * * *
 
 ##### **TetoDDA** `B23`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=INDEX(TetoBeneficio;MATCH(EOMONTH(DDA;-1)+1;IndicesConsolidados!A:A;0)){% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 #,##0.00;(#,##0.00)[Red];-
 ~~~
@@ -334,7 +311,6 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 * * *
 
 ##### **TotalCompetencias** `B8`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=DATEDIF(CompetenciaInicial;CompetenciaFinal;"M")+1{% endhighlight %}
 
 
@@ -344,10 +320,9 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 * * *
 
 ##### **TotalSalariosDDA** `B9`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=COUNTIF(SalarioAtualizado;">0"){% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 0.###############
 ~~~

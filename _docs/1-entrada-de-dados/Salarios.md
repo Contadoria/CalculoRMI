@@ -6,7 +6,7 @@ order: 3
 
 ##### **MarcoFinalAplicacaoArt32** `A4`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 dd/MM/yyyy
 ~~~
@@ -18,7 +18,7 @@ dd/MM/yyyy
 
 ##### **SalariosContribuicao** `D:D`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 0.###############
 dd/MM/yyyy
@@ -26,7 +26,7 @@ dd/MM/yyyy
 #,##0.00;(#,##0.00)
 ~~~
 
-+ **Regra de validação**:
+
 ~~~
 VALUE_IN_RANGE OpcoesAtividadesConcomitantes!A:A
 ~~~
@@ -37,7 +37,7 @@ VALUE_IN_RANGE OpcoesAtividadesConcomitantes!A:A
 
 ##### **ValorAtividadeSecundaria** `A2`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 
-+ **Formato**:
+
 ~~~
 #,##0.00_);[Red](#,##0.00)
 ~~~

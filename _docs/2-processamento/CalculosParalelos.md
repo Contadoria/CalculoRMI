@@ -5,10 +5,9 @@ order: 2
 ---
 
 ##### **MediaUltimos12Salarios** `F2`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=AVERAGE(E:E){% endhighlight %}
 
-+ **Formato**:
+
 ~~~
 #,##0.00;(#,##0.00)[Red];-
 ~~~
@@ -19,7 +18,6 @@ order: 2
 * * *
 
 ##### **MediaUltimos12SalariosDe15** `M2`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=SUM(E:E)/12{% endhighlight %}
 
 
@@ -29,7 +27,6 @@ order: 2
 * * *
 
 ##### **MediaUltimos36SalariosDe48** `K2`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-+ **Fórmula**:
 {% highlight erlang %}=SUM(J:J)/(IF(MID(CriterioPC;1;1)="5";MAX(MIN(COUNTIF(SalarioAtualizado;">0");36);24);MIN(COUNTIF(SalarioAtualizado;">0");36))){% endhighlight %}
 
 
