@@ -7,6 +7,18 @@ order: 0
 'use strict';
 
 /**
+* Retorna o url da planilha.
+*
+* @param {Array} dummy Parâmetro fajuto, apenas para forçar a atualização.
+* @return {string} O url. 
+*
+* @customfunction
+*/
+function jef_URL(dummy) {
+  return SpreadsheetApp.getActiveSpreadsheet().getUrl();
+}
+
+/**
 * Retorna matriz com os índices acumulados a partir de uma matriz de índices, desprezando os índices de valor 'zero'.
 *
 * @param {array} indices Matriz com os índices, em ordem cronológica crescente.
@@ -75,6 +87,10 @@ function jef_JUROS_ACUMULADOS(taxasMensais) {
 * @return {array} A matriz com as rendas mensais reajustadas, observando a ordem dos dados de entrada.
 *
 * @customfunction
+*
+* Alterado em 21/09/2017 - No lugar da técnica da PRECISAO, utilizamos a conversão em string
+*                          para tornar possível o arredondamento para baixo em cada etapa do cálculo.
+*
 */
 function jef_EVOLUCAO_RENDA(valorInicial, fatores) {
   
@@ -86,18 +102,18 @@ function jef_EVOLUCAO_RENDA(valorInicial, fatores) {
     throw new Error ('A renda inicial informada não é numérica.'); 
   }
   
-  var PRECISAO = 1000000000000;
-  
   var valorAtual = valorInicial;
   
   return fatores.map(function(fator){
     if (isNaN(fator)) {
       return valorAtual; 
     }
-    valorAtual = (Math.floor(valorAtual * PRECISAO) * Math.floor(fator * PRECISAO)) / (PRECISAO * PRECISAO);
+    valorAtual = parseFloat((valorAtual * fator).toString().replace(/(\d*\.\d{2})(\d*.)/, '$1'))
     return valorAtual;
   });
+  
 }
+
 
 /**
 * Retorna matriz com o resultado da soma dos valores em cada linha de uma matriz fornecida.
