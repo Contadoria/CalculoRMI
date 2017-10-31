@@ -1,7 +1,7 @@
 ---
 title: ParametrosDemonstrativos
 category: Processamento
-order: 4
+order: 3
 ---
 
 ##### **DadosObrigatoriosFaltantes** `A23`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}

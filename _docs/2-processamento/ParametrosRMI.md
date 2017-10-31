@@ -4,7 +4,7 @@ category: Processamento
 order: 1
 ---
 
-##### **AplicacaoProgressivaFatorPrevidenciario** `B18`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+##### **AplicacaoProgressivaFatorPrevidenciario** `B22`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=IF(AND(DDA>=DATE(1999;11;29);DDA<=DATE(1999;11;30));1;MIN(DATEDIF(DATE(1999;12;1);DDA;"M")+1;60)){% endhighlight %}
 
 
@@ -18,7 +18,7 @@ order: 1
 
 * * *
 
-##### **BaseIndiceTeto** `B29`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+##### **BaseIndiceTeto** `B31`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=IF(OR(MID(CriterioPC;1;1)="1";MID(CriterioPC;1;1)="2");IF(ApurarIndiceTetoComFatorPrevidenciario="SIM";SalarioBeneficio;MAX(SalarioBeneficio;MediaSemFatorPrevidenciario));SalarioBeneficio){% endhighlight %}
 
 
@@ -46,7 +46,7 @@ mm"/"yyyy
 * * *
 
 ##### **CompetenciaInicial** `B3`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=IF(OR(MID(CriterioPC;1;1)="4";MID(CriterioPC;1;1)="5");EDATE((EOMONTH(DDA;-1)+1);-48);IF(MID(CriterioPC;1;1)="3";EDATE((EOMONTH(DDA;-1)+1);-48);DATE(1994;7;1))){% endhighlight %}
+{% highlight erlang %}=IF(OR(MID(CriterioPC;1;1)="4";MID(CriterioPC;1;1)="5");EDATE((EOMONTH(DDA;-1)+1);-48);IF(MID(CriterioPC;1;1)="3";EDATE((EOMONTH(DDA;-1)+1);-15);DATE(1994;7;1))){% endhighlight %}
 
 
 ~~~
@@ -61,7 +61,33 @@ mm"/"yyyy
 
 * * *
 
-##### **DivisorConsiderado** `B14`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+##### **CompetenciaLimiteMenorSalario** `B16`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=IF(OR(MID(CriterioPC;1;1)="1";MID(CriterioPC;1;1)="2");IF(NumeroSalariosExcedentes>0;MIN(QUERY(QUERY(SORT(FILTER({OFFSET(Competencia;1;0)\OFFSET(SalarioAtualizado;1;0)};OFFSET(Competencia;1;0)<>"";OFFSET(SalarioAtualizado;1;0)=MenorSalarioNoPC);1;FALSE);"Select * limit "&NumeroSalariosExcedentes);"Select Col1"));INDEX(OFFSET(Competencia;0;0;COUNTA(Competencia);COLUMN(SalarioAtualizado));MATCH(MenorSalarioNoPC;SalarioAtualizado;0);1));CompetenciaInicial){% endhighlight %}
+
+
+~~~
+dd/MM/yyyy
+~~~
+
+
+
+
+* * *
+
+##### **CompetenciaMaisAntigaPC** `B18`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=IF(OR(MID(CriterioPC;1;1)="3";MID(CriterioPC;1;1)="4";MID(CriterioPC;1;1)="5");MIN(QUERY(QUERY(QUERY(SORT(FILTER({OFFSET(Competencia;1;0)\OFFSET(SalarioAtualizado;1;0)};OFFSET(Competencia;1;0)<>"");1;FALSE);"Select * limit "&PBCMaximo);"Select * WHERE Col2<>0 limit "&PCNormal);"Select Col1"));CompetenciaInicial){% endhighlight %}
+
+
+~~~
+dd/MM/yyyy
+~~~
+
+
+
+
+* * *
+
+##### **DivisorConsiderado** `B17`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=MAX(PCConsiderado;DivisorMinimo){% endhighlight %}
 
 
@@ -87,7 +113,7 @@ mm"/"yyyy
 
 * * *
 
-##### **FatorPrevidenciario** `B17`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+##### **FatorPrevidenciario** `B21`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=(TCTotalDias/360)*0,31/ExpectativaSobrevida*(1+(IdadeTotal+((TCTotalDias/360)*0,31))/100){% endhighlight %}
 
 
@@ -100,7 +126,7 @@ mm"/"yyyy
 
 * * *
 
-##### **IdadeTotal** `B16`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+##### **IdadeTotal** `B20`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=DAYS360(DataNascimento;DIB)/360{% endhighlight %}
 
 
@@ -113,7 +139,7 @@ mm"/"yyyy
 
 * * *
 
-##### **IndiceTeto** `B30`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+##### **IndiceTeto** `B32`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=MAX(BaseIndiceTeto/TetoDDA;1){% endhighlight %}
 
 
@@ -128,7 +154,7 @@ Seleciona o valor máximo entre "1" e a divisão de "BaseIndiceTeto" por "TetoDD
 * * *
 
 ##### **LinhaInicialTabelaIndices** `B5`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=MATCH(CompetenciaInicial;IndicesConsolidados!A:A;0){% endhighlight %}
+{% highlight erlang %}=MATCH(CompetenciaInicial;CompetenciaIndices;0){% endhighlight %}
 
 
 ~~~
@@ -155,7 +181,7 @@ Seleciona o valor máximo entre "1" e a divisão de "BaseIndiceTeto" por "TetoDD
 * * *
 
 ##### **LinhaInicialTabelaSalarios** `B7`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=MATCH(CompetenciaInicial;CalculoSalarios!A:A;0){% endhighlight %}
+{% highlight erlang %}=MATCH(CompetenciaInicial;CompetenciaSalarios;0){% endhighlight %}
 
 
 ~~~
@@ -167,7 +193,7 @@ Seleciona o valor máximo entre "1" e a divisão de "BaseIndiceTeto" por "TetoDD
 
 * * *
 
-##### **MediaComFatorPrevidenciario** `B21`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+##### **MediaComFatorPrevidenciario** `B25`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=((MediaSemFatorPrevidenciario*FatorPrevidenciario*AplicacaoProgressivaFatorPrevidenciario)/60)+((MediaSemFatorPrevidenciario*(60-AplicacaoProgressivaFatorPrevidenciario))/60){% endhighlight %}
 
 
@@ -180,8 +206,8 @@ Seleciona o valor máximo entre "1" e a divisão de "BaseIndiceTeto" por "TetoDD
 
 * * *
 
-##### **MediaSemFatorPrevidenciario** `B20`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=IF(AtividadeSecundaria="Sim";(SomaSalarios/DivisorConsiderado)*NumeradorAtividadeSecundaria/DenominadorAtividadeSecundaria;(SomaSalarios/DivisorConsiderado)+ValorAtividadeSecundaria){% endhighlight %}
+##### **MediaSemFatorPrevidenciario** `B24`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=IF(AtividadeSecundaria="Sim";(SomaSalarios/DivisorConsiderado)*NumeradorAtividadeSecundaria/DenominadorAtividadeSecundaria;(ROUNDDOWN(SomaSalarios/DivisorConsiderado;2))+ValorAtividadeSecundaria){% endhighlight %}
 
 
 ~~~
@@ -194,13 +220,48 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 
 * * *
 
+##### **MediaUltimos12SC** `B28`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=ROUNDDOWN(SUM(QUERY(SORT(FILTER({OFFSET(Competencia;1;0)\OFFSET(SalarioAtualizado;1;0)};OFFSET(Competencia;1;0)<>"";OFFSET(SalarioAtualizado;1;0)<>0);1;FALSE);"Select Col2 limit 12"))/SUM(ARRAYFORMULA(SIGN(QUERY(SORT(FILTER({OFFSET(Competencia;1;0)\OFFSET(SalarioAtualizado;1;0)};OFFSET(Competencia;1;0)<>"";OFFSET(SalarioAtualizado;1;0)<>0);1;FALSE);"Select Col2 limit 12"))));2){% endhighlight %}
+
+
+~~~
+#,##0.00;(#,##0.00)
+~~~
+
+
+> Média dos 12 (doze) últimos salários de contribuição atualizados para verificação da limitação prevista no artigo 29, § 10 da Lei 8.213/91 (incluído pela Medida Provisória nº 664/2014, convertida na Lei 13.135/2015 
+
+* * *
+
+##### **MenorSalarioNoPC** `B14`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=IF(OR(MID(CriterioPC;1;1)="1";MID(CriterioPC;1;1)="2");LARGE(SalarioAtualizado;PCConsiderado);0){% endhighlight %}
+
+
+~~~
+#,##0.00;(#,##0.00)[Red];-
+~~~
+
+
+
+
+* * *
+
+##### **NumeroSalariosExcedentes** `B15`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=IF(OR(MID(CriterioPC;1;1)="1";MID(CriterioPC;1;1)="2");COUNTIF(SalarioAtualizado;">="&MenorSalarioNoPC)-PCConsiderado;0){% endhighlight %}
+
+
+~~~
+0
+~~~
+
+
+
+
+* * *
+
 ##### **PBCMaximo** `B11`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=IF(MID(CriterioPC;1;1)="3";15;IF(OR(MID(CriterioPC;1;1)="4";MID(CriterioPC;1;1)="5");48;TotalCompetencias)){% endhighlight %}
 
-
-~~~
-0.###############
-~~~
 
 
 > Identifica a quantidade máxima de meses contidos no período básico de cálculo, observada a seleção do "CriterioPC" na planilha "Modificadores1".
@@ -208,7 +269,7 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 * * *
 
 ##### **PCConsiderado** `B13`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=MIN(TotalSalariosDDA;MAX(PCMaximo;DivisorMinimo)){% endhighlight %}
+{% highlight erlang %}=MIN(TotalSalariosDDA;MAX(PCNormal;DivisorMinimo)){% endhighlight %}
 
 
 
@@ -216,7 +277,7 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 
 * * *
 
-##### **PCMaximo** `B12`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+##### **PCNormal** `B12`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=IF(OR(MID(CriterioPC;1;1)="1";MID(CriterioPC;1;1)="2");ROUNDDOWN(TotalSalariosDDA*0,8);IF(MID(CriterioPC;1;1)="3";12;IF(OR(MID(CriterioPC;1;1)="4";MID(CriterioPC;1;1)="5");36;TotalSalariosDDA))){% endhighlight %}
 
 
@@ -229,7 +290,7 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 
 * * *
 
-##### **PisoDDA** `B22`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+##### **PisoDDA** `B26`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=INDEX(SalarioMinimo;MATCH(EOMONTH(DDA;-1)+1;IndicesConsolidados!A:A;0)){% endhighlight %}
 
 
@@ -242,8 +303,8 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 
 * * *
 
-##### **RMI** `B28`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=MIN(TetoDDA;MAX(IF(Limitacao12Ultimos="SIM";MIN(SalarioBeneficio*Coeficiente;MediaUltimos12Salarios);SalarioBeneficio*Coeficiente);IF(MID(Especie;1;2)="36";PisoDDA*Coeficiente;PisoDDA))){% endhighlight %}
+##### **RMI** `B30`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=ROUND(MIN(TetoDDA;MAX(IF(Limitacao12Ultimos="SIM";MIN(SalarioBeneficio*Coeficiente;MediaUltimos12SC);SalarioBeneficio*Coeficiente);IF(MID(Especie;1;2)="36";PisoDDA*Coeficiente;PisoDDA)));2){% endhighlight %}
 
 
 ~~~
@@ -255,8 +316,8 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 
 * * *
 
-##### **SalarioBeneficio** `B27`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=MIN(TetoDDA;MAX(PisoDDA;IF(OR(MID(CriterioPC;1;1)="4";MID(CriterioPC;1;1)="5");MediaUltimos36SalariosDe48;IF(MID(CriterioPC;1;1)="3";MediaUltimos12SalariosDe15;IF(AplicarFatorPrevidenciario="FACULTATIVO";MAX(MediaComFatorPrevidenciario;MediaSemFatorPrevidenciario);IF(AplicarFatorPrevidenciario="NÃO";MediaSemFatorPrevidenciario;MediaComFatorPrevidenciario)))))){% endhighlight %}
+##### **SalarioBeneficio** `B29`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=ROUNDDOWN (MIN(TetoDDA;MAX(PisoDDA;IF(AplicarFatorPrevidenciario="NÃO";MediaSemFatorPrevidenciario; IF(AplicarFatorPrevidenciario="FACULTATIVO";MAX(MediaComFatorPrevidenciario;MediaSemFatorPrevidenciario);MediaComFatorPrevidenciario))));2){% endhighlight %}
 
 
 ~~~
@@ -271,7 +332,7 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 
 * * *
 
-##### **SomaSalarios** `B19`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+##### **SomaSalarios** `B23`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=SUM(ARRAYFORMULA(OFFSET(SalarioAtualizado;1;0;TotalCompetencias)*OFFSET(SalarioUtilizado;1;0;TotalCompetencias))){% endhighlight %}
 
 
@@ -284,12 +345,12 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 
 * * *
 
-##### **TCTotalDias** `B15`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=(TCAnos*360)+(TCMeses*30)+TCDias + (IF(Sexo="Mulher";360*5;0)){% endhighlight %}
+##### **TCTotalDias** `B19`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=(TCAnos*360)+(TCMeses*30)+TCDias + (IF(Sexo="Mulher";360*5;0)) + (IF(Especie=57;360*5;0)){% endhighlight %}
 
 
 ~~~
-0.00
+0
 ~~~
 
 
@@ -297,7 +358,7 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 
 * * *
 
-##### **TetoDDA** `B23`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+##### **TetoDDA** `B27`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=INDEX(TetoBeneficio;MATCH(EOMONTH(DDA;-1)+1;IndicesConsolidados!A:A;0)){% endhighlight %}
 
 

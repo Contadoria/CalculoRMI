@@ -1,7 +1,7 @@
 ---
 title: CalculoRMI
 category: Processamento
-order: 3
+order: 2
 ---
 
 ##### **AdmiteZero** `H:H`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
@@ -14,7 +14,7 @@ order: 3
 * * *
 
 ##### **Competencia** `A:A`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=ARRAYFORMULA(IF(ROW(Competencia)=1;"Competência";IF(ROW(Competencia)<=TotalCompetencias+1;EOMONTH(CompetenciaInicial;ROW(Competencia)-2);""))){% endhighlight %}
+{% highlight erlang %}=ARRAYFORMULA(IF(ROW(Competencia)=1;"Competência";IF(ROW(Competencia)<=TotalCompetencias+1;EOMONTH(CompetenciaInicial;ROW(Competencia)-3)+1;""))){% endhighlight %}
 
 
 ~~~
@@ -28,7 +28,7 @@ Seleciona as competências do PBC a partir da planilha "ParametrosRMI" entre Com
 * * *
 
 ##### **FatorAtualizacao** `M:M`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=ARRAYFORMULA(IF(ROW(FatorAtualizacao)=1;"Fator Atualização";IF(ROW(FatorAtualizacao)<=TotalCompetencias+1;jef_INDICE_ACUMULADO(OFFSET(IndiceMensalAtualizacao;0;0;TotalCompetencias+1));""))){% endhighlight %}
+{% highlight erlang %}=ARRAYFORMULA(IF(ROW(FatorAtualizacao)=1;"Fator Atualização";IF(ROW(FatorAtualizacao)<=TotalCompetencias+1;jef_INDICE_ACUMULADO(OFFSET(IndiceMensalAtualizacaoAjustado;0;0;TotalCompetencias+1));""))){% endhighlight %}
 
 
 ~~~
@@ -56,7 +56,7 @@ Seleciona os índices mensais a partir da planilha "IndicesConsolidados" coluna 
 * * *
 
 ##### **IndiceMensalAtualizacaoAjustado** `L:L`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=ARRAYFORMULA(IF(ROW(IndiceMensalAtualizacaoAjustado)=1;"Índice Ajustado";IF(ROW(IndiceMensalAtualizacaoAjustado)<=TotalCompetencias+1;OFFSET(AjusteMoeda;LinhaInicialTabelaIndices-2;0;TotalCompetencias+1)*OFFSET(IndiceMensalAtualizacao;0;0;TotalCompetencias+1);""))){% endhighlight %}
+{% highlight erlang %}=ARRAYFORMULA(IF(ROW(IndiceMensalAtualizacaoAjustado)=1;"Índice Ajustado";IF(ROW(IndiceMensalAtualizacaoAjustado)<=TotalCompetencias+1;OFFSET(MultiplicadorMoeda;LinhaInicialTabelaIndices-2;0;TotalCompetencias+1)*OFFSET(IndiceMensalAtualizacao;0;0;TotalCompetencias+1);""))){% endhighlight %}
 
 
 ~~~
@@ -141,7 +141,7 @@ indica o piso salarial modificado extraído da planilha "Modificadores2" coluna 
 * * *
 
 ##### **SalarioAtualizado** `N:N`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=ARRAYFORMULA(IF(ROW(SalarioAtualizado)=1;"Salário Atualizado";IF(ROW(SalarioAtualizado)<=TotalCompetencias+1;ROUND(SalarioAjustado*FatorAtualizacao;2);""))){% endhighlight %}
+{% highlight erlang %}=ARRAYFORMULA(IF(ROW(SalarioAtualizado)=1;"Salário Atualizado";IF(ROW(SalarioAtualizado)<=TotalCompetencias+1;ROUNDDOWN(SalarioAjustado*FatorAtualizacao;2);""))){% endhighlight %}
 
 
 ~~~
@@ -154,7 +154,7 @@ indica o piso salarial modificado extraído da planilha "Modificadores2" coluna 
 * * *
 
 ##### **SalarioBruto** `F:F`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=ARRAYFORMULA(IF(ROW(SalarioBruto)=1;"Salário Bruto";IF(ROW(SalarioBruto)<=(TotalCompetencias+1);IF(ISNUMBER(SalarioBrutoModificado);SalarioBrutoModificado;OFFSET(ResultadoSalariosFornecidos;LinhaInicialTabelaSalarios-2;0;TotalCompetencias+1));""))){% endhighlight %}
+{% highlight erlang %}=ARRAYFORMULA(IF(ROW(SalarioBruto)=1;"Salário Bruto";IF(ROW(SalarioBruto)<=(TotalCompetencias+1);IF(ISNUMBER(SalarioBrutoModificado);SalarioBrutoModificado;OFFSET(ResultadoSalariosFornecidos;LinhaInicialTabelaSalarios-2;0;TotalCompetencias+1)+OFFSET(BeneficioEvoluido1;LinhaInicialTabelaSalarios+11;0;TotalCompetencias+1)+OFFSET(BeneficioEvoluido2;LinhaInicialTabelaSalarios+11;0;TotalCompetencias+1)+OFFSET(BeneficioEvoluido3;LinhaInicialTabelaSalarios+11;0;TotalCompetencias+1)+OFFSET(BeneficioEvoluido4;LinhaInicialTabelaSalarios+11;0;TotalCompetencias+1)+OFFSET(BeneficioEvoluido5;LinhaInicialTabelaSalarios+11;0;TotalCompetencias+1)+OFFSET(BeneficioEvoluido6;LinhaInicialTabelaSalarios+11;0;TotalCompetencias+1));""))){% endhighlight %}
 
 
 ~~~
@@ -164,6 +164,7 @@ indica o piso salarial modificado extraído da planilha "Modificadores2" coluna 
 
 > Fórmula Matriz (ArrayFormula) 
 Seleciona os salários totais por competência da planilha "CalculoSalarios" coluna B, assumindo os modificadores.
+Adicionados valores evoluídos dos benefícios informados na aba EvoluirBeneficio (alterado em 25/10/2017)
 
 * * *
 
@@ -182,7 +183,7 @@ Seleciona os salários modificados constantes da planilha "Modificadores2" colun
 * * *
 
 ##### **SalarioUtilizado** `O:O`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=ARRAYFORMULA(IF(ROW(SalarioUtilizado)=1;"Salários Utilizados";IF(ROW(SalarioUtilizado)<=TotalCompetencias+1;IF(OR(MID(CriterioPC;1;1)="1";MID(CriterioPC;1;1)="2");IF(ISNUMBER(SalarioAtualizado);IF(SalarioAtualizado>0; SalarioAtualizado>=LARGE(SalarioAtualizado;PCConsiderado);FALSE);"");2);""))){% endhighlight %}
+{% highlight erlang %}=ARRAYFORMULA(IF(ROW(SalarioUtilizado)=1;"Salários Utilizados";IF(ROW(SalarioUtilizado)<=TotalCompetencias+1;IF(OR(MID(CriterioPC;1;1)="1";MID(CriterioPC;1;1)="2");IF(ISNUMBER(SalarioAtualizado);IF(SalarioAtualizado>0; IF(SalarioAtualizado>MenorSalarioNoPC;TRUE;IF(SalarioAtualizado=MenorSalarioNoPC;IF(Competencia>=CompetenciaLimiteMenorSalario;TRUE;FALSE);FALSE));FALSE);"");IF(Competencia<LARGE(Competencia;PBCMaximo);FALSE;IF(SalarioAtualizado=0;FALSE;IF(Competencia<CompetenciaMaisAntigaPC;FALSE;TRUE))));""))){% endhighlight %}
 
 
 

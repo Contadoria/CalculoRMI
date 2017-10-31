@@ -4,6 +4,19 @@ category: Processamento
 order: 0
 ---
 
+##### **CompetenciaSalarios** `A:A`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=ARRAYFORMULA(IF(ROW(CompetenciaIndices)=1;"Competência";CompetenciaIndices)){% endhighlight %}
+
+
+~~~
+mm/yyyy
+~~~
+
+
+
+
+* * *
+
 ##### **Concomitancia** `C:C`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=ARRAYFORMULA(IF(ROW(OFFSET(D1;0;0;COUNTA(Salarios!A6:A);1))=1;"Concomitância";MMULT(IF(ISNUMBER(OFFSET(Salarios!D6;0;0;COUNTA(Salarios!A6:A);COLUMNS(Salarios!6:6)-3));SIGN(OFFSET(Salarios!D6;0;0;COUNTA(Salarios!A6:A);COLUMNS(Salarios!6:6)-3));0);TRANSPOSE(SIGN(COLUMN(OFFSET(Salarios!D6;0;0;1;COLUMNS(Salarios!6:6)-3)))))>=2)){% endhighlight %}
 

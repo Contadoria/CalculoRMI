@@ -5,7 +5,10 @@ order: 1
 ---
 
 ##### **AplicarFatorPrevidenciario** `D18`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=IF(AND(AplicarFatorPrevidenciarioModificado<>"PADRÃO";AplicarFatorPrevidenciarioModificado<>"");AplicarFatorPrevidenciarioModificado;IF(AND(MID(Especie;1;2)="42";OR(BeneficioDeficiente="Sim"; AND(ISNUMBER(PontuacaoMinima);Pontos>=PontuacaoMinima;TCTotalAnos>=TCMinimoPontuacao)));"FACULTATIVO";INDEX(ListaBeneficios!A:E;MATCH(Especie;ListaBeneficios!A:A;0);5))){% endhighlight %}
+{% highlight erlang %}=IF(AND(AplicarFatorPrevidenciarioModificado<>"PADRÃO";AplicarFatorPrevidenciarioModificado<>"");
+AplicarFatorPrevidenciarioModificado;IF(DDA<DATEVALUE("1999-11-29");"NÃO";IF(AND(MID(Especie;1;2)="42";OR(BeneficioDeficiente="Sim";
+ AND(ISNUMBER(PontuacaoMinima);Pontos>=PontuacaoMinima;TCTotalAnos>=TCMinimoPontuacao)));"FACULTATIVO";
+INDEX(ListaBeneficios!A:E;MATCH(Especie;ListaBeneficios!A:A;0);5)))){% endhighlight %}
 
 
 ~~~
@@ -140,7 +143,7 @@ dd/MM/yyyy
 * * *
 
 ##### **ExpectativaSobrevida** `D16`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=IF(ISNUMBER(ExpectativaSobrevidaModificada);ExpectativaSobrevidaModificada;INDEX(TabuasMortalidade!A:CD;MATCH(TabuaMortalidadeUtilizada;TabuasMortalidade!A:A;0);MATCH(Idade;TabuasMortalidade!1:1;0))){% endhighlight %}
+{% highlight erlang %}=IF(DDA<DATEVALUE("1999-11-29");"";IF(ISNUMBER(ExpectativaSobrevidaModificada);ExpectativaSobrevidaModificada;INDEX(TabuasMortalidade!A:CD;MATCH(TabuaMortalidadeUtilizada;TabuasMortalidade!A:A;0);MATCH(Idade;TabuasMortalidade!1:1;0)))){% endhighlight %}
 
 
 ~~~
