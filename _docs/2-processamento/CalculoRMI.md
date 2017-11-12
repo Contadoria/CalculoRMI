@@ -154,7 +154,7 @@ indica o piso salarial modificado extraído da planilha "Modificadores2" coluna 
 * * *
 
 ##### **SalarioBruto** `F:F`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=ARRAYFORMULA(IF(ROW(SalarioBruto)=1;"Salário Bruto";IF(ROW(SalarioBruto)<=(TotalCompetencias+1);IF(ISNUMBER(SalarioBrutoModificado);SalarioBrutoModificado;OFFSET(ResultadoSalariosFornecidos;LinhaInicialTabelaSalarios-2;0;TotalCompetencias+1)+OFFSET(BeneficioEvoluido1;LinhaInicialTabelaSalarios+11;0;TotalCompetencias+1)+OFFSET(BeneficioEvoluido2;LinhaInicialTabelaSalarios+11;0;TotalCompetencias+1)+OFFSET(BeneficioEvoluido3;LinhaInicialTabelaSalarios+11;0;TotalCompetencias+1)+OFFSET(BeneficioEvoluido4;LinhaInicialTabelaSalarios+11;0;TotalCompetencias+1)+OFFSET(BeneficioEvoluido5;LinhaInicialTabelaSalarios+11;0;TotalCompetencias+1)+OFFSET(BeneficioEvoluido6;LinhaInicialTabelaSalarios+11;0;TotalCompetencias+1));""))){% endhighlight %}
+{% highlight erlang %}=ARRAYFORMULA(IF(ROW(SalarioBruto)=1;"Salário Bruto";IF(ROW(SalarioBruto)<=(TotalCompetencias+1);IF(ISNUMBER(SalarioBrutoModificado);SalarioBrutoModificado;OFFSET(ResultadoSalariosFornecidos;LinhaInicialTabelaSalarios-2;0;TotalCompetencias+1)+OFFSET(BeneficioEvoluido1;LinhaInicialTabelaSalarios+10;0;TotalCompetencias+1)+OFFSET(BeneficioEvoluido2;LinhaInicialTabelaSalarios+10;0;TotalCompetencias+1)+OFFSET(BeneficioEvoluido3;LinhaInicialTabelaSalarios+10;0;TotalCompetencias+1)+OFFSET(BeneficioEvoluido4;LinhaInicialTabelaSalarios+10;0;TotalCompetencias+1)+OFFSET(BeneficioEvoluido5;LinhaInicialTabelaSalarios+10;0;TotalCompetencias+1)+OFFSET(BeneficioEvoluido6;LinhaInicialTabelaSalarios+10;0;TotalCompetencias+1)+OFFSET(BeneficioEvoluido7;LinhaInicialTabelaSalarios+10;0;TotalCompetencias+1)+OFFSET(BeneficioEvoluido8;LinhaInicialTabelaSalarios+10;0;TotalCompetencias+1)+OFFSET(BeneficioEvoluido9;LinhaInicialTabelaSalarios+10;0;TotalCompetencias+1)+OFFSET(BeneficioEvoluido10;LinhaInicialTabelaSalarios+10;0;TotalCompetencias+1));""))){% endhighlight %}
 
 
 ~~~
@@ -165,6 +165,7 @@ indica o piso salarial modificado extraído da planilha "Modificadores2" coluna 
 > Fórmula Matriz (ArrayFormula) 
 Seleciona os salários totais por competência da planilha "CalculoSalarios" coluna B, assumindo os modificadores.
 Adicionados valores evoluídos dos benefícios informados na aba EvoluirBeneficio (alterado em 25/10/2017)
+Corrigido destino dos valores gerados em EvoluirBeneficio (alterado em 09/11/2017)
 
 * * *
 
