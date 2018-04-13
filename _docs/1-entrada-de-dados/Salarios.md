@@ -1,7 +1,7 @@
 ---
 title: Salarios
 category: Entrada
-order: 3
+order: 4
 ---
 
 ##### **MarcoFinalAplicacaoArt32** `A4`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
@@ -20,10 +20,7 @@ dd/MM/yyyy
 
 
 ~~~
-0.###############
-dd/MM/yyyy
-#,##0.00
-#,##0.00;(#,##0.00)
+0.00
 ~~~
 
 

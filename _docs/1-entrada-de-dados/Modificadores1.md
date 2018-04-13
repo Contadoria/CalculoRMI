@@ -1,7 +1,7 @@
 ---
 title: Modificadores1
 category: Entrada
-order: 1
+order: 2
 ---
 
 ##### **AplicarFatorPrevidenciario** `D18`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
@@ -143,7 +143,7 @@ dd/MM/yyyy
 * * *
 
 ##### **ExpectativaSobrevida** `D16`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=IF(DDA<DATEVALUE("1999-11-29");"";IF(ISNUMBER(ExpectativaSobrevidaModificada);ExpectativaSobrevidaModificada;INDEX(TabuasMortalidade!A:CD;MATCH(TabuaMortalidadeUtilizada;TabuasMortalidade!A:A;0);MATCH(Idade;TabuasMortalidade!1:1;0)))){% endhighlight %}
+{% highlight erlang %}=IF(DDA<DATEVALUE("1999-11-29");"";IF(ISNUMBER(ExpectativaSobrevidaModificada);ExpectativaSobrevidaModificada;INDEX(TabuasMortalidade!A:CD;MATCH(TabuaMortalidadeUtilizada;TabuasMortalidade!A:A;0);MATCH(DATEDIF(DataNascimento;DIB;"Y");TabuasMortalidade!1:1;0)))){% endhighlight %}
 
 
 ~~~
@@ -152,6 +152,7 @@ dd/MM/yyyy
 
 
 > Expectativa de sobrevida (ambos os sexos) conforme tábua de mortalidade utilizada
+Tendo em vista alteração do intervalo Idade, adaptada busca de correspondência conforme fórmula DATADIF(DataNascimento;DIB;"Y") (Alterado em 21/11/2017)
 
 * * *
 
@@ -168,15 +169,16 @@ dd/MM/yyyy
 * * *
 
 ##### **Idade** `D6`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=DATEDIF(DataNascimento;DIB;"Y"){% endhighlight %}
+{% highlight erlang %}=DAYS360(DataNascimento;DIB)/360{% endhighlight %}
 
 
 ~~~
-#,##0;(#,##0)
+#,##0.00;(#,##0.00)
 ~~~
 
 
-> Idade do segurado na DER
+> Idade do segurado na DER.
+Ajuste para considerar as frações conforme previsto na Lei 13.183/2015 (alterado em 21/11/2017)
 
 * * *
 
@@ -274,7 +276,7 @@ VALUE_IN_RANGE ListaBeneficios!F:F
 * * *
 
 ##### **TabuaMortalidadeUtilizada** `D15`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=IF(ISNUMBER(TabuaMortalidadeUtilizadaModificada);TabuaMortalidadeUtilizadaModificada;MIN(YEAR(DDA)-2;UltimaTabuaMortalidade)){% endhighlight %}
+{% highlight erlang %}=IF(ISNUMBER(TabuaMortalidadeUtilizadaModificada);TabuaMortalidadeUtilizadaModificada;INDEX(TabuasMortalidade!A:A;ARRAYFORMULA(COUNTIF(OFFSET(TabuasMortalidade!A:A;1;COUNTA(TabuasMortalidade!B1:1);COUNTA(TabuasMortalidade!B:B)-1);"<="&DIB))+1;1)){% endhighlight %}
 
 
 ~~~

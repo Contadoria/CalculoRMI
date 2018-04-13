@@ -1,7 +1,7 @@
 ---
 title: Modificadores2
 category: Entrada
-order: 2
+order: 3
 ---
 
 ##### **CompetenciaModificadores** `C:C`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}

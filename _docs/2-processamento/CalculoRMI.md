@@ -194,7 +194,7 @@ indica por "VERDADEIRO" ou "FALSO" as competências com salários selecionados p
 * * *
 
 ##### **Teto** `D:D`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=ARRAYFORMULA(IF(ROW(Teto)=1;"Teto";IF(ROW(Teto)<=TotalCompetencias+1;IF(ISNUMBER(TetoModificado);TetoModificado;OFFSET(TetoBeneficio;LinhaInicialTabelaIndices-2;0;TotalCompetencias+1));""))){% endhighlight %}
+{% highlight erlang %}=ARRAYFORMULA(IF(ROW(Teto)=1;"Teto";IF(ROW(Teto)<=TotalCompetencias+1;IF(ISNUMBER(TetoModificado);TetoModificado;OFFSET(TetoContribuicao;LinhaInicialTabelaIndices-2;0;TotalCompetencias+1));""))){% endhighlight %}
 
 
 ~~~
