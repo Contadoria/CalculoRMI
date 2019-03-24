@@ -16,9 +16,7 @@ dd/MM/yyyy
 ~~~
 
 
-> Identifica a aplicação do fator previdenciário (SIM; NÃO; FACULTATIVA) mediante:
-- identificação da espécie do benefício, observada a correspondência na planilha "ListaBenefícios" coluna E
-- identificação da implementação de pontuação mínima na espécie "42" 
+
 
 * * *
 
@@ -34,7 +32,7 @@ dd/MM/yyyy
 VALUE_IN_RANGE ListaBeneficios!E:E
 ~~~
 
-> Modificador do critério referente à aplicação do fator previdenciário, inserido manualmente, selecionando "SIM", "NÃO" ou "FACULTATIVO"
+
 
 * * *
 
@@ -47,7 +45,7 @@ VALUE_IN_RANGE ListaBeneficios!E:E
 ~~~
 
 
-> Indica a necessidade de apuração do índice de limitação ao teto do salário de benefício  (artigo 26 da Lei 8.870/94 e artigo 21, §3º da Lei 8.880/94) após a publicação da Lei 9.876/99, que criou o fator previdenciário
+
 
 * * *
 
@@ -63,7 +61,7 @@ VALUE_IN_RANGE ListaBeneficios!E:E
 VALUE_IN_LIST SIM,NÃO
 ~~~
 
-> Modificador do critério referente à apuração do índice de reposição ao teto, inserido manualmente selecionando "SIM" ou "NÃO"
+
 
 * * *
 
@@ -72,7 +70,6 @@ VALUE_IN_LIST SIM,NÃO
 
 
 
-> Critério para fixação do período contributivo conforme espécie e data do direito adquirido 
 
 
 * * *
@@ -89,7 +86,7 @@ VALUE_IN_LIST SIM,NÃO
 VALUE_IN_RANGE OpcoesPC!A:A
 ~~~
 
-> Modificador para fixação do período contributivo conforme espécie e data do direito adquirido, selecionado manualmente 
+
 
 * * *
 
@@ -102,7 +99,7 @@ dd/MM/yyyy
 ~~~
 
 
-> Data do direito adquirido, anterior a DER
+
 
 * * *
 
@@ -114,7 +111,7 @@ dd/MM/yyyy
 ~~~
 
 
-> Modificador referente a DDA, inserção manual
+
 
 * * *
 
@@ -126,7 +123,7 @@ dd/MM/yyyy
 ~~~
 
 
-> Data da publicação da Lei 9.876/99
+
 
 * * *
 
@@ -138,7 +135,7 @@ dd/MM/yyyy
 ~~~
 
 
-> Data da publicação da Medida Provisória nº 676/2015, convertida na Lei nº 11.183/2015
+
 
 * * *
 
@@ -151,8 +148,7 @@ dd/MM/yyyy
 ~~~
 
 
-> Expectativa de sobrevida (ambos os sexos) conforme tábua de mortalidade utilizada
-Tendo em vista alteração do intervalo Idade, adaptada busca de correspondência conforme fórmula DATADIF(DataNascimento;DIB;"Y") (Alterado em 21/11/2017)
+
 
 * * *
 
@@ -164,7 +160,7 @@ Tendo em vista alteração do intervalo Idade, adaptada busca de correspondênci
 ~~~
 
 
-> Modificador da expectativa de sobrevida, inserido manualmente
+
 
 * * *
 
@@ -177,8 +173,7 @@ Tendo em vista alteração do intervalo Idade, adaptada busca de correspondênci
 ~~~
 
 
-> Idade do segurado na DER.
-Ajuste para considerar as frações conforme previsto na Lei 13.183/2015 (alterado em 21/11/2017)
+
 
 * * *
 
@@ -191,7 +186,7 @@ Ajuste para considerar as frações conforme previsto na Lei 13.183/2015 (altera
 ~~~
 
 
-> Identifica aplicação da limitação do valor da Renda Mensal Inicial conforme previsto na Medida Provisória nº 664/2014, convertida na Lei 13.135/2015 (média dos doze últimos salários de contribuição) mediante verificação  da data de início do benefício e correspondência da espécie com a planilha "ListaBeneficios" coluna F.
+
 
 * * *
 
@@ -207,7 +202,7 @@ Ajuste para considerar as frações conforme previsto na Lei 13.183/2015 (altera
 VALUE_IN_RANGE ListaBeneficios!F:F
 ~~~
 
-> Modificador do critério referente à limitação do valor da Renda Mensal Inicial conforme previsto na Medida Provisória nº 664/2014, convertida na Lei 13.135/2015 (média dos doze útlimos salários de contribuição) 
+
 
 * * *
 
@@ -220,7 +215,7 @@ VALUE_IN_RANGE ListaBeneficios!F:F
 ~~~
 
 
-> Indica os pontos apurados na DER, nos termos da MP nº 676/2015 (idade + tempo de contribuição)
+
 
 * * *
 
@@ -232,7 +227,7 @@ VALUE_IN_RANGE ListaBeneficios!F:F
 ~~~
 
 
-> Modificador dos pontos apurados na DER, inserido manualmente.
+
 
 * * *
 
@@ -245,7 +240,7 @@ VALUE_IN_RANGE ListaBeneficios!F:F
 ~~~
 
 
-> Indica a pontuação necessária para possibilitar aplicação facultativa do fator previdenciário (apenas para aposentadoria por tempo de contribuição) conforme artigo 29-C da Lei nº 8.213/91 (incluído pela Medida Provisória nº 676/2015, convertida na Lei nº 11.183/2015)
+
 
 * * *
 
@@ -258,7 +253,7 @@ VALUE_IN_RANGE ListaBeneficios!F:F
 ~~~
 
 
-> Tempo de contribuição mínimo necessário para possibilitar aplicação facultativa do fator previdenciário (apenas para aposentadoria por tempo de contribuição) conforme artigo 29-C, I e II da Lei nº 8.213/91 (incluído pela Medida Provisória nº 676/2015, convertida na Lei nº 11.183/2015)
+
 
 * * *
 
@@ -271,7 +266,7 @@ VALUE_IN_RANGE ListaBeneficios!F:F
 ~~~
 
 
-> Tempo de contribuição total considerado, em anos.
+
 
 * * *
 
@@ -284,7 +279,7 @@ VALUE_IN_RANGE ListaBeneficios!F:F
 ~~~
 
 
-> Ano-base dos dados utilizados na elaboração da tábua de mortalidade utilizada (publicada em dezembro do ano seguinte)
+
 
 * * *
 
@@ -296,7 +291,7 @@ VALUE_IN_RANGE ListaBeneficios!F:F
 ~~~
 
 
-> Modificador referente ao ano da tábua de mortalidade a ser utilizada, inserção manual.
+
 
 * * *
 
@@ -309,4 +304,3 @@ VALUE_IN_RANGE ListaBeneficios!F:F
 ~~~
 
 
-> Ano-base dos dados utilizados na elaboração da última tábua de mortalidade publicada pelo IBGE.

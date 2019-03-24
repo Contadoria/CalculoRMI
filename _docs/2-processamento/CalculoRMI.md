@@ -9,7 +9,7 @@ order: 2
 
 
 
-> Matriz referentes às competências em que são admitidos valores iguais a zero. Caso contrário, haverá preenchimento com o valor do salário-mínimo (ModificadoresUsarPiso na aba Modificadores2, coluna H).
+
 
 * * *
 
@@ -22,8 +22,7 @@ mm/yyyy
 ~~~
 
 
-> Fórmula Matriz (ArrayFormula) 
-Seleciona as competências do PBC a partir da planilha "ParametrosRMI" entre CompetênciaInicial e TotalCompetencias.
+
 
 * * *
 
@@ -36,8 +35,7 @@ Seleciona as competências do PBC a partir da planilha "ParametrosRMI" entre Com
 ~~~
 
 
-> Fórmula Matriz (ArrayFormula) 
-calcula os índices acumulados a partir de uma matriz construída pelos índices mensais (coluna J) em relação ao total de competências.
+
 
 * * *
 
@@ -50,8 +48,7 @@ calcula os índices acumulados a partir de uma matriz construída pelos índices
 ~~~
 
 
-> Fórmula Matriz (ArrayFormula) 
-Seleciona os índices mensais a partir da planilha "IndicesConsolidados" coluna N, assumindo modificações inseridas.
+
 
 * * *
 
@@ -64,8 +61,7 @@ Seleciona os índices mensais a partir da planilha "IndicesConsolidados" coluna 
 ~~~
 
 
-> Fórmula Matriz (ArrayFormula) 
-Seleciona os índices mensais a partir da planilha "IndicesConsolidados" observado o ajuste de moeda, coluna I.
+
 
 * * *
 
@@ -78,8 +74,7 @@ Seleciona os índices mensais a partir da planilha "IndicesConsolidados" observa
 ~~~
 
 
-> Fórmula Matriz (ArrayFormula) 
-Seleciona os índices mensais modificados a partir da planilha "Modificadores2" coluna F.
+
 
 * * *
 
@@ -92,8 +87,7 @@ Seleciona os índices mensais modificados a partir da planilha "Modificadores2" 
 ~~~
 
 
-> Fórmula Matriz (ArrayFormula) 
-Seleciona os índices mensais modificados a partir da planilha "Modificadores2" coluna F.
+
 
 * * *
 
@@ -106,8 +100,7 @@ Seleciona os índices mensais modificados a partir da planilha "Modificadores2" 
 ~~~
 
 
-> Fórmula Matriz (ArrayFormula) 
-indica o piso salarial a partir do salário mínimo constante da planilha "IndicesConsolidados" coluna B, ou, "PisoModificado" inserido.
+
 
 * * *
 
@@ -120,8 +113,7 @@ indica o piso salarial a partir do salário mínimo constante da planilha "Indic
 ~~~
 
 
-> Fórmula Matriz (ArrayFormula) 
-indica o piso salarial modificado extraído da planilha "Modificadores2" coluna D.
+
 
 * * *
 
@@ -134,9 +126,7 @@ indica o piso salarial modificado extraído da planilha "Modificadores2" coluna 
 ~~~
 
 
-> Fórmula Matriz (ArrayFormula) indica o salário ajustado mediante: 
--limitação do salário bruto ao teto
--assume piso salarial quando não admite zero
+
 
 * * *
 
@@ -149,7 +139,7 @@ indica o piso salarial modificado extraído da planilha "Modificadores2" coluna 
 ~~~
 
 
-> Fórmula Matriz (ArrayFormula) apura o salário atualizado em cada competência mediante aplicação do fator de atualização sobre o salário ajustado.
+
 
 * * *
 
@@ -162,10 +152,7 @@ indica o piso salarial modificado extraído da planilha "Modificadores2" coluna 
 ~~~
 
 
-> Fórmula Matriz (ArrayFormula) 
-Seleciona os salários totais por competência da planilha "CalculoSalarios" coluna B, assumindo os modificadores.
-Adicionados valores evoluídos dos benefícios informados na aba EvoluirBeneficio (alterado em 25/10/2017)
-Corrigido destino dos valores gerados em EvoluirBeneficio (alterado em 09/11/2017)
+
 
 * * *
 
@@ -178,18 +165,16 @@ Corrigido destino dos valores gerados em EvoluirBeneficio (alterado em 09/11/201
 ~~~
 
 
-> Fórmula Matriz (ArrayFormula) 
-Seleciona os salários modificados constantes da planilha "Modificadores2" coluna G.
+
 
 * * *
 
 ##### **SalarioUtilizado** `O:O`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=ARRAYFORMULA(IF(ROW(SalarioUtilizado)=1;"Salários Utilizados";IF(ROW(SalarioUtilizado)<=TotalCompetencias+1;IF(OR(MID(CriterioPC;1;1)="1";MID(CriterioPC;1;1)="2");IF(ISNUMBER(SalarioAtualizado);IF(SalarioAtualizado>0; IF(SalarioAtualizado>MenorSalarioNoPC;TRUE;IF(SalarioAtualizado=MenorSalarioNoPC;IF(Competencia>=CompetenciaLimiteMenorSalario;TRUE;FALSE);FALSE));FALSE);"");IF(Competencia<LARGE(Competencia;PBCMaximo);FALSE;IF(SalarioAtualizado=0;FALSE;IF(Competencia<CompetenciaMaisAntigaPC;FALSE;TRUE))));""))){% endhighlight %}
+{% highlight erlang %}=ARRAYFORMULA(IF(ROW(SalarioUtilizado)=1;"Salários Utilizados";IF(ROW(SalarioUtilizado)<=TotalCompetenciasPBC+1;IF(OR(MID(CriterioPC;1;1)="1";MID(CriterioPC;1;1)="2");IF(ISNUMBER(SalarioAtualizado);IF(SalarioAtualizado>0; IF(SalarioAtualizado>MenorSalarioNoPC;TRUE;IF(SalarioAtualizado=MenorSalarioNoPC;IF(Competencia>=CompetenciaLimiteMenorSalario;TRUE;FALSE);FALSE));FALSE);"");IF(SalarioAtualizado=0;FALSE;IF(Competencia<CompetenciaMaisAntigaPC;FALSE;TRUE)));""))){% endhighlight %}
 
 
 
-> Fórmula Matriz (ArrayFormula) 
-indica por "VERDADEIRO" ou "FALSO" as competências com salários selecionados para o cálculo.
+
 
 * * *
 
@@ -202,8 +187,7 @@ indica por "VERDADEIRO" ou "FALSO" as competências com salários selecionados p
 ~~~
 
 
-> Fórmula Matriz (ArrayFormula) 
-indica o teto do benefício constante da planilha "IndicesConsolidados" coluna E, ou, "TetoModificado" inserido.
+
 
 * * *
 
@@ -216,5 +200,16 @@ indica o teto do benefício constante da planilha "IndicesConsolidados" coluna E
 ~~~
 
 
-> Fórmula Matriz (ArrayFormula) 
-indica o teto do benefício modificado extraído da planilha "Modificadores2" coluna E.
+
+
+* * *
+
+##### **ValoresUtilizados** `P:P`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=ARRAYFORMULA(IF(ROW(ValoresUtilizados)=1;"Valores Utilizados";IF(ROW(SalarioAtualizado)<=TotalCompetencias+1;IF(SalarioUtilizado=TRUE();SalarioAtualizado;0);""))){% endhighlight %}
+
+
+~~~
+#,##0.00;(#,##0.00)[Red];-
+~~~
+
+

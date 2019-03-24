@@ -4,7 +4,7 @@ category: Processamento
 order: 1
 ---
 
-##### **AplicacaoProgressivaFatorPrevidenciario** `B22`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+##### **AplicacaoProgressivaFatorPrevidenciario** `B25`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=IF(AND(DDA>=DATE(1999;11;29);DDA<=DATE(1999;11;30));1;MIN(DATEDIF(DATE(1999;12;1);DDA;"M")+1;60)){% endhighlight %}
 
 
@@ -13,13 +13,12 @@ order: 1
 ~~~
 
 
-> Quantidade de meses considerados para aplicação da progressividade do fator previdenciário conforme artigo 5º da Lei nº 9.876/99.
-"MINIMO(DATADIF)" identifica o menor número de meses entre 60 e 
+
 
 * * *
 
-##### **BaseIndiceTeto** `B31`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=IF(OR(MID(CriterioPC;1;1)="1";MID(CriterioPC;1;1)="2");IF(ApurarIndiceTetoComFatorPrevidenciario="SIM";SalarioBeneficio;MAX(SalarioBeneficio;MediaSemFatorPrevidenciario));SalarioBeneficio){% endhighlight %}
+##### **BaseIndiceTeto** `B34`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=IF(OR(MID(CriterioPC;1;1)="1";MID(CriterioPC;1;1)="2");IF(ApurarIndiceTetoComFatorPrevidenciario="SIM";MediaComFatorPrevidenciario;MAX(MediaComFatorPrevidenciario;MediaSemFatorPrevidenciario));MediaSemFatorPrevidenciario){% endhighlight %}
 
 
 ~~~
@@ -27,13 +26,12 @@ order: 1
 ~~~
 
 
-> Base de cálculo para apuração do índice de reposição previsto nos artigos 26 da Lei nº 8.870/94 e 21, § 3º da Lei nº 8.880/94.
-Considerada a opção "SIM" na planilha "Modificadores1", célula F20, será utilizado o valor após aplicação do fator previdenciário. Caso contrário, será utilizado o valor sem aplicação do fator previdenciário.
+
 
 * * *
 
 ##### **CompetenciaFinal** `B4`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=EOMONTH(DDA;-2)+1{% endhighlight %}
+{% highlight erlang %}=EOMONTH(DIB;-2)+1{% endhighlight %}
 
 
 ~~~
@@ -41,7 +39,7 @@ mm"/"yyyy
 ~~~
 
 
-> Mês referente à última competência utilizada para fixação do período básico de cálculo.
+
 
 * * *
 
@@ -54,15 +52,12 @@ mm"/"yyyy
 ~~~
 
 
-> Mês referente à primeira competência utilizada para fixação do período básico de cálculo.
-* Caso CriterioPC (célula D17 da aba Modificadores) seja igual a 4 ou 5, corresponderá ao 48º mês anterior à data do direito adquirido (DDA).
-* Caso CriterioPC (célula D17 da aba Modificadores) seja igual a 3, corresponderá ao 15º mês anterior á data do direito adquirido (DDA).
-* Caso CriterioPC (célula D17 da aba Modificadores) seja igual a 1 ou 2, corresponderá a julho/94.
+
 
 * * *
 
-##### **CompetenciaLimiteMenorSalario** `B16`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=IF(OR(MID(CriterioPC;1;1)="1";MID(CriterioPC;1;1)="2");IF(NumeroSalariosExcedentes>0;MIN(QUERY(QUERY(SORT(FILTER({OFFSET(Competencia;1;0)\OFFSET(SalarioAtualizado;1;0)};OFFSET(Competencia;1;0)<>"";OFFSET(SalarioAtualizado;1;0)=MenorSalarioNoPC);1;FALSE);"Select * limit "&NumeroSalariosExcedentes);"Select Col1"));INDEX(OFFSET(Competencia;0;0;COUNTA(Competencia);COLUMN(SalarioAtualizado));MATCH(MenorSalarioNoPC;SalarioAtualizado;0);1));CompetenciaInicial){% endhighlight %}
+##### **CompetenciaLimiteMenorSalario** `B18`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=IF(OR(MID(CriterioPC;1;1)="1";MID(CriterioPC;1;1)="2");IF(NumeroSalariosExcedentes>0;MIN(QUERY(QUERY(SORT(FILTER({OFFSET(Competencia;1;0;PBCMaximo)\OFFSET(SalarioAtualizado;1;0;PBCMaximo)};OFFSET(Competencia;1;0;PBCMaximo)<>"";OFFSET(SalarioAtualizado;1;0;PBCMaximo)=MenorSalarioNoPC);1;FALSE);"Select * limit "&NumeroMenoresSalariosUtilizados);"Select Col1"));INDEX(OFFSET(Competencia;0;0;COUNTA(Competencia);COLUMN(SalarioAtualizado));MATCH(MenorSalarioNoPC;SalarioAtualizado;0);1));CompetenciaInicial){% endhighlight %}
 
 
 ~~~
@@ -74,8 +69,8 @@ dd/MM/yyyy
 
 * * *
 
-##### **CompetenciaMaisAntigaPC** `B18`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=IF(OR(MID(CriterioPC;1;1)="3";MID(CriterioPC;1;1)="4";MID(CriterioPC;1;1)="5");MIN(QUERY(QUERY(QUERY(SORT(FILTER({OFFSET(Competencia;1;0)\OFFSET(SalarioAtualizado;1;0)};OFFSET(Competencia;1;0)<>"");1;FALSE);"Select * limit "&PBCMaximo);"Select * WHERE Col2<>0 limit "&PCNormal);"Select Col1"));CompetenciaInicial){% endhighlight %}
+##### **CompetenciaMaisAntigaPC** `B21`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=IF(OR(MID(CriterioPC;1;1)="3";MID(CriterioPC;1;1)="4";MID(CriterioPC;1;1)="5");MIN(QUERY(QUERY(QUERY(SORT(FILTER({OFFSET(Competencia;1;0;PBCMaximo)\OFFSET(SalarioAtualizado;1;0;PBCMaximo)};OFFSET(Competencia;1;0;PBCMaximo)<>"");1;FALSE);"Select * limit "&PBCMaximo);"Select * WHERE Col2<>0 limit "&PCNormal);"Select Col1"));CompetenciaInicial){% endhighlight %}
 
 
 ~~~
@@ -87,7 +82,7 @@ dd/MM/yyyy
 
 * * *
 
-##### **DivisorConsiderado** `B17`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+##### **DivisorConsiderado** `B19`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=MAX(PCConsiderado;DivisorMinimo){% endhighlight %}
 
 
@@ -96,11 +91,11 @@ dd/MM/yyyy
 ~~~
 
 
-> Divisor utilizado, considerados divisor mínimo e período contributivo considerado, identifica o valor máximo entre "PCConsiderado" e "DivisorMinimo".
+
 
 * * *
 
-##### **DivisorMinimo** `B10`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+##### **DivisorMinimo** `B11`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=IF(MID(CriterioPC;1;1)="2";ROUNDDOWN(TotalCompetencias*0,6);IF(MID(CriterioPC;1;1)="3";12;IF(MID(CriterioPC;1;1)="5";24;ROUNDDOWN(TotalSalariosDDA*0,8)))){% endhighlight %}
 
 
@@ -109,12 +104,12 @@ dd/MM/yyyy
 ~~~
 
 
-> Divisor mínimo a ser utilizado, observado critério de fixação do período contributivo na planilha "Modificadores1" célula D17.
+
 
 * * *
 
-##### **FatorPrevidenciario** `B21`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=(TCTotalDias/360)*0,31/ExpectativaSobrevida*(1+(IdadeTotal+((TCTotalDias/360)*0,31))/100){% endhighlight %}
+##### **FatorPrevidenciario** `B24`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=IF(DDA<DATEVALUE("1999-11-29");"";(TCTotalDias/360)*0,31/ExpectativaSobrevida*(1+(IdadeTotal+((TCTotalDias/360)*0,31))/100)){% endhighlight %}
 
 
 ~~~
@@ -122,11 +117,11 @@ dd/MM/yyyy
 ~~~
 
 
-> Fator previdenciário apurado com base na fórmula cosntante do anexo da Lei nº 9.876/99.
+
 
 * * *
 
-##### **IdadeTotal** `B20`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+##### **IdadeTotal** `B23`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=DAYS360(DataNascimento;DIB)/360{% endhighlight %}
 
 
@@ -135,12 +130,12 @@ dd/MM/yyyy
 ~~~
 
 
-> Idade total do segurado contada em anos.
+
 
 * * *
 
-##### **IndiceTeto** `B32`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=MAX(BaseIndiceTeto/TetoDDA;1){% endhighlight %}
+##### **IndiceTeto** `B35`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=IF(DDA>DATEVALUE("1991-4-4");MAX(BaseIndiceTeto/TetoDIB;1);""){% endhighlight %}
 
 
 ~~~
@@ -148,8 +143,7 @@ dd/MM/yyyy
 ~~~
 
 
-> Índice de reposição apurado previsto nos artigos 26 da Lei nº 8.870/94 e 21, § 3º da Lei nº 8.880/94.
-Seleciona o valor máximo entre "1" e a divisão de "BaseIndiceTeto" por "TetoDDA"
+
 
 * * *
 
@@ -162,7 +156,7 @@ Seleciona o valor máximo entre "1" e a divisão de "BaseIndiceTeto" por "TetoDD
 ~~~
 
 
-> Indica a linha da tabela "IndicesConsolidados" correspondente à competência inicial
+
 
 * * *
 
@@ -175,7 +169,6 @@ Seleciona o valor máximo entre "1" e a divisão de "BaseIndiceTeto" por "TetoDD
 ~~~
 
 
-> Indica a linha da tabela "Modificadores2" correspondente à competência inicial.
 
 
 * * *
@@ -189,12 +182,12 @@ Seleciona o valor máximo entre "1" e a divisão de "BaseIndiceTeto" por "TetoDD
 ~~~
 
 
-> Indica a linha da tabela "CalculoSalarios" referente à competência inicial.
+
 
 * * *
 
-##### **MediaComFatorPrevidenciario** `B25`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=((MediaSemFatorPrevidenciario*FatorPrevidenciario*AplicacaoProgressivaFatorPrevidenciario)/60)+((MediaSemFatorPrevidenciario*(60-AplicacaoProgressivaFatorPrevidenciario))/60){% endhighlight %}
+##### **MediaComFatorPrevidenciario** `B28`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=((ROUNDDOWN(SomaSalarios/DivisorConsiderado;2)*FatorPrevidenciario*AplicacaoProgressivaFatorPrevidenciario)/60)+((ROUNDDOWN(SomaSalarios/DivisorConsiderado;2)*(60-AplicacaoProgressivaFatorPrevidenciario))/60)+ValorAtividadeSecundaria{% endhighlight %}
 
 
 ~~~
@@ -202,11 +195,11 @@ Seleciona o valor máximo entre "1" e a divisão de "BaseIndiceTeto" por "TetoDD
 ~~~
 
 
-> Resultado da média da somatória dos s.c. atualizados, após aplicação do fator previdenciário (progressivo, se for o caso).
+
 
 * * *
 
-##### **MediaSemFatorPrevidenciario** `B24`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+##### **MediaSemFatorPrevidenciario** `B27`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=IF(AtividadeSecundaria="Sim";(SomaSalarios/DivisorConsiderado)*NumeradorAtividadeSecundaria/DenominadorAtividadeSecundaria;(ROUNDDOWN(SomaSalarios/DivisorConsiderado;2))+ValorAtividadeSecundaria){% endhighlight %}
 
 
@@ -215,12 +208,11 @@ Seleciona o valor máximo entre "1" e a divisão de "BaseIndiceTeto" por "TetoDD
 ~~~
 
 
-> Resultado da divisão entre a soma dos salários e o divisor considerado.
-No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213/91, aplica o coeficiente da atividade secundária à média obtida.
+
 
 * * *
 
-##### **MediaUltimos12SC** `B28`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+##### **MediaUltimos12SC** `B31`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=ROUNDDOWN(SUM(QUERY(SORT(FILTER({OFFSET(Competencia;1;0)\OFFSET(SalarioAtualizado;1;0)};OFFSET(Competencia;1;0)<>"";OFFSET(SalarioAtualizado;1;0)<>0);1;FALSE);"Select Col2 limit 12"))/SUM(ARRAYFORMULA(SIGN(QUERY(SORT(FILTER({OFFSET(Competencia;1;0)\OFFSET(SalarioAtualizado;1;0)};OFFSET(Competencia;1;0)<>"";OFFSET(SalarioAtualizado;1;0)<>0);1;FALSE);"Select Col2 limit 12"))));2){% endhighlight %}
 
 
@@ -229,12 +221,12 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 ~~~
 
 
-> Média dos 12 (doze) últimos salários de contribuição atualizados para verificação da limitação prevista no artigo 29, § 10 da Lei 8.213/91 (incluído pela Medida Provisória nº 664/2014, convertida na Lei 13.135/2015 
+
 
 * * *
 
-##### **MenorSalarioNoPC** `B14`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=IF(OR(MID(CriterioPC;1;1)="1";MID(CriterioPC;1;1)="2");LARGE(SalarioAtualizado;PCConsiderado);0){% endhighlight %}
+##### **MenorSalarioNoPC** `B15`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=IF(OR(MID(CriterioPC;1;1)="1";MID(CriterioPC;1;1)="2");LARGE(OFFSET(SalarioAtualizado;1;0;PBCMaximo);PCConsiderado);0){% endhighlight %}
 
 
 ~~~
@@ -246,8 +238,8 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 
 * * *
 
-##### **NumeroSalariosExcedentes** `B15`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=IF(OR(MID(CriterioPC;1;1)="1";MID(CriterioPC;1;1)="2");COUNTIF(SalarioAtualizado;">="&MenorSalarioNoPC)-PCConsiderado;0){% endhighlight %}
+##### **NumeroMenoresSalariosUtilizados** `B17`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=COUNTIF(SalarioAtualizado;"="&MenorSalarioNoPC)-NumeroSalariosExcedentes{% endhighlight %}
 
 
 ~~~
@@ -259,25 +251,38 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 
 * * *
 
-##### **PBCMaximo** `B11`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+##### **NumeroSalariosExcedentes** `B16`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=IF(OR(MID(CriterioPC;1;1)="1";MID(CriterioPC;1;1)="2");COUNTIF(OFFSET(SalarioAtualizado;1;0;PBCMaximo);">="&MenorSalarioNoPC)-PCConsiderado;0){% endhighlight %}
+
+
+~~~
+0
+~~~
+
+
+
+
+* * *
+
+##### **PBCMaximo** `B12`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=IF(MID(CriterioPC;1;1)="3";15;IF(OR(MID(CriterioPC;1;1)="4";MID(CriterioPC;1;1)="5");48;TotalCompetencias)){% endhighlight %}
 
 
 
-> Identifica a quantidade máxima de meses contidos no período básico de cálculo, observada a seleção do "CriterioPC" na planilha "Modificadores1".
+
 
 * * *
 
-##### **PCConsiderado** `B13`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+##### **PCConsiderado** `B14`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=MIN(TotalSalariosDDA;MAX(PCNormal;DivisorMinimo)){% endhighlight %}
 
 
 
-> Identifica a quantidade de salários de contribuição utilizados, observados divisor mínimo e período contributivo máximo.
+
 
 * * *
 
-##### **PCNormal** `B12`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+##### **PCNormal** `B13`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=IF(OR(MID(CriterioPC;1;1)="1";MID(CriterioPC;1;1)="2");ROUNDDOWN(TotalSalariosDDA*0,8);IF(MID(CriterioPC;1;1)="3";12;IF(OR(MID(CriterioPC;1;1)="4";MID(CriterioPC;1;1)="5");36;TotalSalariosDDA))){% endhighlight %}
 
 
@@ -286,12 +291,12 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 ~~~
 
 
-> Identifica a quantidade máxima de salários de contribuição que podem ser utilizados no cálculo, observada a seleção do "CriterioPC" na planilha "Modificadores1".
+
 
 * * *
 
-##### **PisoDDA** `B26`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=INDEX(SalarioMinimo;MATCH(EOMONTH(DDA;-1)+1;IndicesConsolidados!A:A;0)){% endhighlight %}
+##### **PisoDIB** `B29`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=IF(AtividadeSecundaria="Sim";0;INDEX(SalarioMinimo;MATCH(EOMONTH(DIB;-1)+1;IndicesConsolidados!A:A;0))){% endhighlight %}
 
 
 ~~~
@@ -299,12 +304,12 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 ~~~
 
 
-> Identifica o valor mínimo do benefício considerado na data do direito adquirido.
+
 
 * * *
 
-##### **RMI** `B30`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=ROUND(MIN(TetoDDA;MAX(IF(Limitacao12Ultimos="SIM";MIN(SalarioBeneficio*Coeficiente;MediaUltimos12SC);SalarioBeneficio*Coeficiente);IF(MID(Especie;1;2)="36";PisoDDA*Coeficiente;PisoDDA)));2){% endhighlight %}
+##### **RMI** `B33`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=ROUND(MIN(TetoDIB;MAX(IF(Limitacao12Ultimos="SIM";MIN(SalarioBeneficio*Coeficiente;MediaUltimos12SC);SalarioBeneficio*Coeficiente);IF(MID(Especie;1;2)="36";PisoDIB*Coeficiente;PisoDIB)));2){% endhighlight %}
 
 
 ~~~
@@ -312,12 +317,12 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 ~~~
 
 
-> Renda mensal inicial apurada correspondente ao valor do salário-de-benefício multiplicado pelo coeficiente de cálculo, observado o critério de fixação do período contributivo selecionado na planilha "Modificadores1"
+
 
 * * *
 
-##### **SalarioBeneficio** `B29`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=ROUNDDOWN (MIN(TetoDDA;MAX(PisoDDA;IF(AplicarFatorPrevidenciario="NÃO";MediaSemFatorPrevidenciario; IF(AplicarFatorPrevidenciario="FACULTATIVO";MAX(MediaComFatorPrevidenciario;MediaSemFatorPrevidenciario);MediaComFatorPrevidenciario))));2){% endhighlight %}
+##### **SalarioBeneficio** `B32`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=ROUNDDOWN (MIN(TetoDIB;MAX(PisoDIB;IF(AplicarFatorPrevidenciario="NÃO";MediaSemFatorPrevidenciario; IF(AplicarFatorPrevidenciario="FACULTATIVO";MAX(MediaComFatorPrevidenciario;MediaSemFatorPrevidenciario);MediaComFatorPrevidenciario))));2){% endhighlight %}
 
 
 ~~~
@@ -325,14 +330,11 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 ~~~
 
 
-> Indica o salário-de-benefício, considerados o piso e o teto previdenciário, observados: 
--o critério do período contributivo selecionado na planilha "Modificadores1" célula D17
--aplicação do fator previdenciário
 
 
 * * *
 
-##### **SomaSalarios** `B23`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+##### **SomaSalarios** `B26`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=SUM(ARRAYFORMULA(OFFSET(SalarioAtualizado;1;0;TotalCompetencias)*OFFSET(SalarioUtilizado;1;0;TotalCompetencias))){% endhighlight %}
 
 
@@ -341,11 +343,11 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 ~~~
 
 
-> Soma dos salários de contribuição   atualizados, extraídos da planilha "CalculoRMI" coluna N.
+
 
 * * *
 
-##### **TCTotalDias** `B19`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+##### **TCTotalDias** `B22`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
 {% highlight erlang %}=(TCAnos*360)+(TCMeses*30)+TCDias + (IF(Sexo="Mulher";360*5;0)) + (IF(Especie=57;360*5;0)){% endhighlight %}
 
 
@@ -354,12 +356,12 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 ~~~
 
 
-> Tempo de contribuição em dias, já consideradas as conversões de períodos e sexo do segurado.
+
 
 * * *
 
-##### **TetoDDA** `B27`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=INDEX(TetoBeneficio;MATCH(EOMONTH(DDA;-1)+1;IndicesConsolidados!A:A;0)){% endhighlight %}
+##### **TetoDIB** `B30`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=INDEX(TetoContribuicao;MATCH(EOMONTH(DIB;-1)+1;IndicesConsolidados!A:A;0)){% endhighlight %}
 
 
 ~~~
@@ -367,7 +369,7 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 ~~~
 
 
-> Teto máximo de contribuição considerado na data do direito adquirido
+
 
 * * *
 
@@ -376,12 +378,12 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 
 
 
-> Indica a quantidade de competência entre as competências inicial (inclusive) e final (inclusive).
+
 
 * * *
 
-##### **TotalSalariosDDA** `B9`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=COUNTIF(SalarioAtualizado;">0"){% endhighlight %}
+##### **TotalCompetenciasPBC** `B9`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=COUNTIF(Competencia;"<"&EOMONTH(DDA;-1)+1){% endhighlight %}
 
 
 ~~~
@@ -389,4 +391,16 @@ No caso de atividade secundária apurada nos termos do art. 32, da Lei nº 8.213
 ~~~
 
 
-> Quantidade de meses do período básico de cálculo que possuem salários de contribuição informados
+
+
+* * *
+
+##### **TotalSalariosDDA** `B10`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
+{% highlight erlang %}=COUNTIFS(SalarioAtualizado;">0";Competencia;"<"&EOMONTH(DDA;-1)+1){% endhighlight %}
+
+
+~~~
+0.###############
+~~~
+
+

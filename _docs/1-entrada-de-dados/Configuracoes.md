@@ -5,7 +5,6 @@ order: 0
 ---
 
 ##### **EstatisticaUrl** `D7`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=HYPERLINK("https://script.google.com/macros/s/AKfycbwNamlkeJ7-yHPvC40cOpnIjoYR9BamK94xR0x0GEiORdrzkJk/exec"; "CALCULO (ESTATISTICA)"){% endhighlight %}
 
 
 ~~~
@@ -13,7 +12,7 @@ order: 0
 ~~~
 
 
-> Link para planilha vinculada de estatística
+
 
 * * *
 
@@ -25,7 +24,7 @@ order: 0
 ~~~
 
 
-> Indicador que será exibido na parte superior à direita do demonstrativo
+
 
 * * *
 
@@ -69,7 +68,7 @@ VALUE_IN_LIST Sim,Não
 ~~~
 
 
-> Observações que serão exibidas na parte final do demonstrativo
+
 
 * * *
 
@@ -113,12 +112,15 @@ VALUE_IN_RANGE ListaJuizos!C:C
 ~~~
 
 
-> Título que será exibido no demonstrativo
+
 
 * * *
 
 ##### **UrlPlanilha** `D4`{: style="background-color: lightgrey; color: black; border-radius: 5px; padding:3px;"}
-{% highlight erlang %}=jef_URL(Demonstrativo!F16){% endhighlight %}
 
+
+~~~
+0.###############
+~~~
 
 

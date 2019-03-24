@@ -16,7 +16,7 @@ order: 1
 VALUE_IN_LIST Não,Sim
 ~~~
 
-> Opção de cálculo do valor da renda mensal referente à atividade secundária (artigo 32 da Lei 8.213/91)
+
 
 * * *
 
@@ -28,7 +28,7 @@ VALUE_IN_LIST Não,Sim
 ~~~
 
 
-> Nome do autor
+
 
 * * *
 
@@ -44,7 +44,7 @@ VALUE_IN_LIST Não,Sim
 VALUE_IN_LIST Sim,Não
 ~~~
 
-> Opção de cálculo para adequar à sistemática da Lei COmplementar nº 142/2013
+
 
 * * *
 
@@ -56,7 +56,7 @@ dd/MM/yyyy
 ~~~
 
 
-> Data da citação do Réu.
+
 
 * * *
 
@@ -68,7 +68,6 @@ dd/MM/yyyy
 ~~~
 
 
-> Coeficiente de cálculo da renda mensal inicial do benefício (percentual)
 
 
 * * *
@@ -81,7 +80,7 @@ dd/MM/yyyy
 DATE_IS_VALID_DATE 
 ~~~
 
-> Data de início do benefício
+
 
 * * *
 
@@ -93,7 +92,7 @@ dd/mm/yyyy
 ~~~
 
 
-> Data de nascimento do segurado
+
 
 * * *
 
@@ -105,7 +104,7 @@ dd/mm/yyyy
 ~~~
 
 
-> Tempo mínimo em anos necessário ao benefício (denominador) conforme artigo 32 da Lei nº 8.213/91
+
 
 * * *
 
@@ -121,7 +120,7 @@ dd/mm/yyyy
 VALUE_IN_RANGE ListaBeneficios!A:A
 ~~~
 
-> Código referente à espécie do benefício
+
 
 * * *
 
@@ -134,7 +133,7 @@ VALUE_IN_RANGE ListaBeneficios!A:A
 ~~~
 
 
-> Espécie do benefício
+
 
 * * *
 
@@ -146,7 +145,7 @@ VALUE_IN_RANGE ListaBeneficios!A:A
 ~~~
 
 
-> Número do benefício
+
 
 * * *
 
@@ -158,7 +157,7 @@ VALUE_IN_RANGE ListaBeneficios!A:A
 ~~~
 
 
-> Tempo de contribuição em anos referente à atividade secundária (numerador) conforme artigo 32 da Lei nº 8.213/91
+
 
 * * *
 
@@ -170,7 +169,7 @@ VALUE_IN_RANGE ListaBeneficios!A:A
 ~~~
 
 
-> Número do processo
+
 
 * * *
 
@@ -182,7 +181,7 @@ dd/MM/yyyy
 ~~~
 
 
-> Data do protocolo inicial do processo
+
 
 * * *
 
@@ -194,7 +193,7 @@ dd/MM/yyyy
 ~~~
 
 
-> Nome do Réu
+
 
 * * *
 
@@ -210,7 +209,6 @@ dd/MM/yyyy
 VALUE_IN_LIST Homem,Mulher
 ~~~
 
-> Sexo do segurado
 
 
 * * *
@@ -227,7 +225,7 @@ VALUE_IN_LIST Homem,Mulher
 NUMBER_GREATER_THAN_OR_EQUAL_TO 0
 ~~~
 
-> Número de anos referentes ao tempo de contribuição do segurado
+
 
 * * *
 
@@ -243,7 +241,7 @@ NUMBER_GREATER_THAN_OR_EQUAL_TO 0
 NUMBER_GREATER_THAN_OR_EQUAL_TO 0
 ~~~
 
-> Número de dias referentes ao tempo de contribuição do segurado
+
 
 * * *
 
@@ -259,4 +257,3 @@ NUMBER_GREATER_THAN_OR_EQUAL_TO 0
 NUMBER_GREATER_THAN_OR_EQUAL_TO 0
 ~~~
 
-> Número de meses referentes ao tempo de contribuição do segurado

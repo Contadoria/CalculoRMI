@@ -14,7 +14,7 @@ mm/yyyy
 ~~~
 
 
-> Matriz correspondente aos meses em que poderão ser lançados modificadores diversos
+
 
 * * *
 
@@ -26,8 +26,7 @@ mm/yyyy
 ~~~
 
 
-> Modificadores dos índices mensais de atualização a serem considerados, inserção manual
-Modificação dos índices de atualização a serem aplicados aos s.c., inserção manual.
+
 
 * * *
 
@@ -40,8 +39,7 @@ Modificação dos índices de atualização a serem aplicados aos s.c., inserç�
 ~~~
 
 
-> Campo para inserção de observações
-Inserção de observações vinculadas aos modificadores.
+
 
 * * *
 
@@ -53,8 +51,7 @@ Inserção de observações vinculadas aos modificadores.
 ~~~
 
 
-> Modificadores dos pisos a serem considerados, inserção manual
-Modifica o piso salarial a ser considerado na competência, inserção manual.
+
 
 * * *
 
@@ -66,8 +63,6 @@ Modifica o piso salarial a ser considerado na competência, inserção manual.
 ~~~
 
 
-> Modificadores dos salários de contribuição a serem considerados, inserção manual
-Modificação do s.c. relativo à competência, inserção manual.
 
 
 * * *
@@ -80,8 +75,7 @@ Modificação do s.c. relativo à competência, inserção manual.
 ~~~
 
 
-> Modificadores dos tetos a serem considerados, inserção manual
-Modificação do teto previdenciário relativo à competência, inserção manual.
+
 
 * * *
 
@@ -93,4 +87,3 @@ Modificação do teto previdenciário relativo à competência, inserção manua
 ~~~
 
 
-> Opção para preenchimento automático com base no valor do piso, inserção manual

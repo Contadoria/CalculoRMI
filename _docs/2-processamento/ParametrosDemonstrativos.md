@@ -14,7 +14,7 @@ order: 3
 ~~~
 
 
-> Indica os dados obrigatórios não preenchidos.
+
 
 * * *
 
@@ -26,7 +26,7 @@ order: 3
 ~~~
 
 
-> Indica os dados do benefício que devem constar da Súmula.
+
 
 * * *
 
@@ -39,7 +39,7 @@ order: 3
 ~~~
 
 
-> Extrai o texto das observações inseridas na planilha, caso ativada a  opção "MostrarObservacoesAutomaticas"
+
 
 * * *
 
@@ -51,8 +51,6 @@ order: 3
 0.###############
 ~~~
 
-
-> Extrai observações inseridas nos modificadores.
 
 
 
@@ -67,4 +65,3 @@ order: 3
 ~~~
 
 
-> Indica o texto que deve constar da Súmula.
